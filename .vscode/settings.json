@@ -1,0 +1,11 @@
+{
+  "powermode.enabled": true,
+  "editor.formatOnSave": true,
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptvue",
+    "vue-html": "html",
+    "razor": "html",
+    "plaintext": "jade"
+  }
+}
