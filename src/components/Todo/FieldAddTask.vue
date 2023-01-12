@@ -1,5 +1,5 @@
 <template>
-   <v-text-field class="pa-3" v-model="newTaskTitle" outlined label="Add Task" hide-details
+   <v-text-field class="pa-3 field-add-task" v-model="newTaskTitle" outlined label="Add Task" hide-details
       clearable @keyup.enter="addTask">
       >
       <template v-slot:append>
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     addTask() {
-      if (this.newTaskTitle.trim()) {
+      if (this.newTaskTitle) {
         this.$store.dispatch('addTask', this.newTaskTitle)
         this.newTaskTitle = ''
       }
@@ -37,3 +37,9 @@ export default {
   },
 }
 </script>
+<style lang="sass">
+.field-add-task.v-input--is-focused
+  .v-input__slot
+    background: rgba(31,94,129, 0.5)
+
+</style>

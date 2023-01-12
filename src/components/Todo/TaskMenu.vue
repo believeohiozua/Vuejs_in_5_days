@@ -30,6 +30,7 @@
 </v-menu>
 
 <dialog-edit v-if="dialogs.edit" :task="task" @close="dialogs.edit=false"/>
+<dialog-due-date v-if="dialogs.dueDate" :task="task" @close="dialogs.dueDate=false"/>
 <dialog-delete v-if="dialogs.delete" :task="task" @close="dialogs.delete=false"/>
     </div>
 
@@ -46,25 +47,41 @@ props: {
     data: () => ({
         dialogs:{
             edit: false,
-                delete: false,
+            delete: false,
+            dueDate: false
             },
       items: [
-        { title: 'Edit',
+        { 
+        title: 'Edit',
         icon:'mdi-pencil' ,
         click(){
             this.dialogs.edit=true
         }
     },
-        { title: 'Due date' ,
+        { 
+        title: 'Due date' ,
         icon:'mdi-calendar',
         click(){
-           console.log('edit')
+            this.dialogs.dueDate=true
         }
     },
-        { title: 'Delete' ,
+        { 
+        title: 'Delete' ,
         icon:'mdi-delete',
         click(){
             this.dialogs.delete=true
+        }
+    },
+        { 
+        title: 'Sort' ,
+        icon:'mdi-drag-horizontal-variant',
+        click(){
+            if (!this.$store.state.search){
+              this.$store.commit('toggleSorting')
+            }
+            else{
+              this.$store.commit('showSnackbar', 'Cannot sort while searching')
+            }
         }
     },
       ],
@@ -77,6 +94,7 @@ props: {
     components:{
         'dialog-delete': () => import('@/components/Todo/DialogsDelete.vue'),
         'dialog-edit': () => import('@/components/Todo/DialogsEdit.vue'),
+        'dialog-due-date': () => import('@/components/Todo/DialogsDueDate.vue'),
     }
 }
 </script>

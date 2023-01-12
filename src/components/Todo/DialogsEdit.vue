@@ -65,6 +65,7 @@ methods:{
       }
       this.$store.dispatch('updateTaskTitle', payload)
     this.$emit('close')
+    this.$vuetify.goTo(0, {duraion:0})
   }
     }
 }

@@ -1,10 +1,14 @@
 <template>
     <v-list flat class="pt-0">
+        <draggable 
+        :v-model="tasks"
+        handle=".handle">
         <task
-            v-for="task in $store.state.tasks"
+            v-for="task in tasks"
             :key="task.id"
             :task="task"
         />
+        </draggable>
 
     
 
@@ -12,9 +16,22 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
+
 export default {
+    computed: {
+        tasks: {
+            get() {
+                return this.$store.getters.tasksFiltered
+            },
+            set(value) {
+                this.$store.diapatch('setTasks', value)
+            }
+        }
+},
     components: {
         'task': () => import('@/components/Todo/Task.vue'),
+        draggable
     },
 
 }
