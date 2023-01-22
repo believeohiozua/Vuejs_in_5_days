@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/TodoView.vue'
 import goTo from 'vuetify/es5/services/goto'
+// import TableView from ''
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    path: '/table',
+    name: 'table',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../views/TableView.vue')
   }
 ]
 
@@ -31,7 +40,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-  goTo(0, { duration: 0 })  
+  goTo(0, { duration: 0 })
 })
 
 export default router
